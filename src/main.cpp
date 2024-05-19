@@ -163,7 +163,8 @@ void loop() {
                     double t4 = +1.0 - 2.0 * (q2sqr + q3 * q3);
                     double yaw = atan2(t3, t4) * 180.0 / PI;
 
-                    client.println((String)roll + "," + (String)pitch + "," + (String)yaw);
+                    client.print(String(roll, 15) + "," + String(pitch, 15) + "," + String(yaw, 15));
+                    client.flush();
                 }
             }
 
