@@ -46,9 +46,9 @@ const char *password = "password";
 
 #define SPI_PORT SPI  // Your desired SPI port.       Used only when "USE_SPI" is defined
 #define ICM_CS 15     // Which pin you connect CS to. Used only when "USE_SPI" is defined
-#define ICM_SCK 14
-#define ICM_MISO 27
-#define ICM_MOSI 13
+#define ICM_SCK 14    // SCL
+#define ICM_MISO 27   // SDO
+#define ICM_MOSI 13   // SDA
 
 #define WIRE_PORT Wire  // Your desired Wire port.      Used when "USE_SPI" is not defined
 // The value of the last bit of the I2C address.
@@ -163,8 +163,9 @@ void loop() {
                     double t4 = +1.0 - 2.0 * (q2sqr + q3 * q3);
                     double yaw = atan2(t3, t4) * 180.0 / PI;
 
-                    client.print(String(roll, 15) + "," + String(pitch, 15) + "," + String(yaw, 15));
+                    client.print(String(pitch, 15) + "," + String(-yaw + 90, 15) + "," + String(roll + 90, 15));
                     client.flush();
+                    // delay(10);
                 }
             }
 
